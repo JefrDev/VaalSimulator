@@ -1,0 +1,50 @@
+{
+	"itemName": "Expert Feathered Sandals",
+	"attributes": [
+	  {
+	    "type": "prefix",
+	    "min": 60,
+	    "max": 69,
+	    "current": 65,
+	    "text": "+CURRENT to maximum life",
+	    "tier": 5
+	  },
+	  {
+	    "type": "prefix",
+	    "text": "+30% increased movement speed",
+	    "tier": 5
+	  },
+	  {
+	    "type": "prefix hybrid",
+	    "min": [21, 25],
+	    "max": [26, 40],
+	    "current": [24, 28],
+	    "text": "+CURRENT% increased energy shield, +CURRENT to stun threshold",
+	    "tier": 3
+	  },
+	  {
+	    "type": "suffix",
+	    "min": 25,
+	    "max": 27,
+	    "current": 27,
+	    "text": "+CURRENT to intelligence",
+	    "tier": 6
+	  },
+	  {
+	    "type": "suffix",
+	    "min": 20,
+	    "max": 23,
+	    "current": 23,
+	    "text": "+CURRENT to chaos resistance",
+	    "tier": 5
+	  },
+	  {
+	    "type": "suffix",
+	    "min": 164,
+	    "max": 206,
+	    "current": 202,
+	    "text": "+CURRENT to stun threshold",
+	    "tier": 8
+	  }
+	]
+}
