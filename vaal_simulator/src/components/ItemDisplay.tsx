@@ -5,14 +5,14 @@ import { Item, createDefaultItem } from "../types/Item";
 export const ItemDisplay = () => {
   const [item, setItem] = useState<Item>();
 
-
-  const loadDefaultItem = async () => {
-    const item = createDefaultItem("Expert Feathered Sandals");
+async function loadDefaultItem(itemName: string) {
+    const item = createDefaultItem(itemName);
     setItem(item);
-};
+}
+
 
   useEffect(() => {
-    loadDefaultItem();
+    loadDefaultItem("Expert Feathered Sandals");
   }, []);
 
   return (
