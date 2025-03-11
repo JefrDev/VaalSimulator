@@ -9,24 +9,25 @@ export interface Item {
 }
 
 interface BaseAffix {
-    text: string;
-
     tier: number;
 
 }
 
 interface VariableAffix extends BaseAffix {
+    text: string;
     min: number;
     max: number; 
     value: number;
 }
 
 interface FixedAffix extends BaseAffix {
+    text: string;
     value: number;
 }
 
 
 interface HybridAffix extends BaseAffix {
+    text: string[];
     min: [number, number];
     max: [number, number];
     value: [number, number];
@@ -56,7 +57,7 @@ export const createDefaultItem = (name: string): Item => ({
             min: [21, 25],
             max: [26, 40],
             value: [24, 28],
-            text: '+CURRENT% increased energy shield, +CURRENT to stun threshold',
+            text: ['+CURRENT% increased energy shield', '+CURRENT to stun threshold'],
             tier: 3
         }
     ],
@@ -79,7 +80,7 @@ export const createDefaultItem = (name: string): Item => ({
             min: [15, 10],
             max: [20, 15],
             value: [18, 12],
-            text: '+CURRENT% to fire resistance, +CURRENT% to cold resistance',
+            text: ['+CURRENT% to fire resistance', '+CURRENT% to cold resistance'],
             tier: 4
         }
     ]

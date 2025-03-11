@@ -10,12 +10,14 @@ async function loadDefaultItem(itemName: string) {
     setItem(item);
 }
 
-function getFulltext(text: string, value1: number, value2?: number) {
-  if (value2) {
-    return text.replace('CURRENT', value1.toString()).replace('CURRENT2', value2.toString());
-  }
+function getFulltext(text: string, value: number) {
+
   
-    return text.replace('CURRENT', value1.toString());
+    return text.replace('CURRENT', value.toString());
+}
+
+function getFullTextHybrid(text: string[], value: number[]) {
+  return text.map((t, index) => t.replace('CURRENT', value[index].toString())).join(', ');
 }
 
   useEffect(() => {
@@ -30,18 +32,18 @@ function getFulltext(text: string, value1: number, value2?: number) {
         {item?.prefixes.map((prefix, index) => (
           <div key={`prefix-${index}`}>
             {/* If value is an array, it means its a hybrid affix and should be treated slightly differently */}
-            {Array.isArray(prefix.value) 
-              ? getFulltext(prefix.text, prefix.value[0], prefix.value[1])
-              : getFulltext(prefix.text, prefix.value)
+            {Array.isArray(prefix.value) && Array.isArray(prefix.text)
+              ? getFullTextHybrid(prefix.text, prefix.value)
+              : getFulltext(prefix.text as string, prefix.value as number)
             }
           </div>
         ))}
         {item?.suffixes.map((suffix, index) => (
           <div key={`suffix-${index}`}>
             {/* If value is an array, it means its a hybrid affix and should be treated slightly differently */}
-            {Array.isArray(suffix.value)
-              ? getFulltext(suffix.text, suffix.value[0], suffix.value[1])
-              : getFulltext(suffix.text, suffix.value)
+            {Array.isArray(suffix.value) && Array.isArray(suffix.text)
+              ? getFullTextHybrid(suffix.text, suffix.value)
+              : getFulltext(suffix.text as string, suffix.value as number)
             }
           </div>
         ))}
