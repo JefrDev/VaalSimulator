@@ -10,7 +10,7 @@ export interface Item {
 
 interface BaseAffix {
     text: string;
-    
+
     tier: number;
 
 }
@@ -53,7 +53,6 @@ export const createDefaultItem = (name: string): Item => ({
             tier: 5
         },
         {
-            type: 'hybrid',
             min: [21, 25],
             max: [26, 40],
             value: [24, 28],
