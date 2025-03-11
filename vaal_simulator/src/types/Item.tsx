@@ -10,8 +10,9 @@ export interface Item {
 
 interface BaseAffix {
     text: string;
-    tier: number;
     
+    tier: number;
+
 }
 
 interface VariableAffix extends BaseAffix {
@@ -26,7 +27,6 @@ interface FixedAffix extends BaseAffix {
 
 
 interface HybridAffix extends BaseAffix {
-    type: 'hybrid';
     min: [number, number];
     max: [number, number];
     value: [number, number];
@@ -77,7 +77,6 @@ export const createDefaultItem = (name: string): Item => ({
             tier: 5
         },
         {
-            type: 'hybrid',
             min: [15, 10],
             max: [20, 15],
             value: [18, 12],

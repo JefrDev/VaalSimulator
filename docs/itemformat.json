@@ -13,7 +13,6 @@
 			"tier": 5
 		  },
 		  {
-			"type": "prefix hybrid",
 			"min": [
 			  21,
 			  25
@@ -32,7 +31,6 @@
 	],
 	"suffixes": [
 		{
-			"type": "suffix",
 			"min": 25,
 			"max": 27,
 			"value": 27,
@@ -40,7 +38,6 @@
 			"tier": 6
 		  },
 		  {
-			"type": "suffix",
 			"min": 20,
 			"max": 23,
 			"value": 23,
@@ -48,7 +45,6 @@
 			"tier": 5
 		  },
 		  {
-			"type": "suffix",
 			"min": 164,
 			"max": 206,
 			"value": 202,
