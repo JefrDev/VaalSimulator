@@ -4,11 +4,11 @@ export interface Item {
     itemLevel: number;
     quality?: number;
     rarity: 'Normal' | 'Magic' | 'Rare' | 'Unique';
-    affixes: (VariableAffix | FixedAffix | HybridAffix)[];
+    prefixes: (VariableAffix | FixedAffix | HybridAffix)[];
+    suffixes: (VariableAffix | FixedAffix | HybridAffix)[];
 }
 
 interface BaseAffix {
-    type: 'prefix' | 'suffix';
     text: string;
     tier: number;
 }
@@ -25,7 +25,7 @@ interface FixedAffix extends BaseAffix {
 
 
 interface HybridAffix {
-    type: 'prefix hybrid' | 'suffix hybrid';
+    type: 'hybrid';
     min: [number, number];
     max: [number, number];
     value: [number, number];
@@ -40,9 +40,8 @@ export const createDefaultItem = (name: string): Item => ({
     itemLevel: 79,
     quality: 20,
     rarity: 'Rare',
-    affixes: [
+    prefixes: [
         {
-            type: 'prefix',
             min: 60,
             max: 69,
             value: 65,
@@ -50,21 +49,21 @@ export const createDefaultItem = (name: string): Item => ({
             tier: 5
         },
         {
-            type: 'prefix',
             value: 30,
             text: '+CURRENT% increased movement speed',
             tier: 5
         },
         {
-            type: 'prefix hybrid',
+            type: 'hybrid',
             min: [21, 25],
-            max: [26, 40], 
+            max: [26, 40],
             value: [24, 28],
             text: '+CURRENT% increased energy shield, +CURRENT to stun threshold',
             tier: 3
-        },
+        }
+    ],
+    suffixes: [
         {
-            type: 'suffix',
             min: 25,
             max: 27,
             value: 27,
@@ -72,7 +71,6 @@ export const createDefaultItem = (name: string): Item => ({
             tier: 6
         },
         {
-            type: 'suffix',
             min: 20,
             max: 23,
             value: 23,
@@ -80,7 +78,7 @@ export const createDefaultItem = (name: string): Item => ({
             tier: 5
         },
         {
-            type: 'suffix hybrid',
+            type: 'hybrid',
             min: [15, 10],
             max: [20, 15],
             value: [18, 12],
