@@ -4,7 +4,7 @@ export interface Item {
     itemLevel: number;
     quality?: number;
     rarity: 'Normal' | 'Magic' | 'Rare' | 'Unique';
-    attributes: (VariableAffix | FixedAffix | HybridAffix)[];
+    affixes: (VariableAffix | FixedAffix | HybridAffix)[];
 }
 
 interface BaseAffix {
@@ -40,7 +40,7 @@ export const createDefaultItem = (name: string): Item => ({
     itemLevel: 79,
     quality: 20,
     rarity: 'Rare',
-    attributes: [
+    affixes: [
         {
             type: 'prefix',
             min: 60,
