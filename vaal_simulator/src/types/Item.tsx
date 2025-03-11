@@ -13,20 +13,20 @@ interface BaseAffix {
 
 }
 
-interface VariableAffix extends BaseAffix {
+export interface VariableAffix extends BaseAffix {
     text: string;
     min: number;
     max: number; 
     value: number;
 }
 
-interface FixedAffix extends BaseAffix {
+export interface FixedAffix extends BaseAffix {
     text: string;
     value: number;
 }
 
 
-interface HybridAffix extends BaseAffix {
+export interface HybridAffix extends BaseAffix {
     text: string[];
     min: [number, number];
     max: [number, number];

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Item, createDefaultItem } from "../types/Item";
+import { Item, createDefaultItem, VariableAffix, FixedAffix, HybridAffix } from "../types/Item";
 
 
 export const ItemDisplay = () => {
@@ -10,9 +10,11 @@ async function loadDefaultItem(itemName: string) {
     setItem(item);
 }
 
-function getFulltext(text: string, value: number) {
+function isHybridAffix(affix: VariableAffix | FixedAffix | HybridAffix): affix is HybridAffix {
+  return Array.isArray((affix as HybridAffix).text) && Array.isArray((affix as HybridAffix).value);
+}
 
-  
+function getFulltext(text: string, value: number) {
     return text.replace('CURRENT', value.toString());
 }
 
@@ -29,26 +31,23 @@ function getFullTextHybrid(text: string[], value: number[]) {
       <h1>Item Display</h1>
       <h2>{item?.itemName}</h2>
       <div>
-        {item?.prefixes.map((prefix, index) => (
-          <div key={`prefix-${index}`}>
-            {/* If value is an array, it means its a hybrid affix and should be treated slightly differently */}
-            {Array.isArray(prefix.value) && Array.isArray(prefix.text)
-              ? getFullTextHybrid(prefix.text, prefix.value)
-              : getFulltext(prefix.text as string, prefix.value as number)
-            }
-          </div>
-        ))}
+      {item?.prefixes.map((prefix, index) => (
+    <div key={`prefix-${index}`}>
+        {isHybridAffix(prefix)
+            ? getFullTextHybrid(prefix.text, prefix.value)
+            : getFulltext(prefix.text, prefix.value)
+        }
+    </div>
+))}
         {item?.suffixes.map((suffix, index) => (
           <div key={`suffix-${index}`}>
-            {/* If value is an array, it means its a hybrid affix and should be treated slightly differently */}
-            {Array.isArray(suffix.value) && Array.isArray(suffix.text)
+            {isHybridAffix(suffix)
               ? getFullTextHybrid(suffix.text, suffix.value)
-              : getFulltext(suffix.text as string, suffix.value as number)
+              : getFulltext(suffix.text, suffix.value)
             }
           </div>
         ))}
-      </div>
-      
+      </div>   
     </div>
   );
 };
