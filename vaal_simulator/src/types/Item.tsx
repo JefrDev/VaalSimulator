@@ -11,6 +11,7 @@ export interface Item {
 interface BaseAffix {
     text: string;
     tier: number;
+    
 }
 
 interface VariableAffix extends BaseAffix {
@@ -24,13 +25,11 @@ interface FixedAffix extends BaseAffix {
 }
 
 
-interface HybridAffix {
+interface HybridAffix extends BaseAffix {
     type: 'hybrid';
     min: [number, number];
     max: [number, number];
     value: [number, number];
-    text: string;
-    tier: number;
 }
 
 // Helper function to create a new item with default values
