@@ -10,8 +10,12 @@ async function loadDefaultItem(itemName: string) {
     setItem(item);
 }
 
-function getFulltext(text: string, value: number) {
-    return text.replace('CURRENT', value.toString());
+function getFulltext(text: string, value1: number, value2?: number) {
+  if (value2) {
+    return text.replace('CURRENT', value1.toString()).replace('CURRENT2', value2.toString());
+  }
+  
+    return text.replace('CURRENT', value1.toString());
 }
 
   useEffect(() => {
@@ -25,16 +29,18 @@ function getFulltext(text: string, value: number) {
       <div>
         {item?.prefixes.map((prefix, index) => (
           <div key={`prefix-${index}`}>
+            {/* If value is an array, it means its a hybrid affix and should be treated slightly differently */}
             {Array.isArray(prefix.value) 
-              ? getFulltext(prefix.text, prefix.value[0]).replace('CURRENT', prefix.value[1].toString())
+              ? getFulltext(prefix.text, prefix.value[0], prefix.value[1])
               : getFulltext(prefix.text, prefix.value)
             }
           </div>
         ))}
         {item?.suffixes.map((suffix, index) => (
           <div key={`suffix-${index}`}>
+            {/* If value is an array, it means its a hybrid affix and should be treated slightly differently */}
             {Array.isArray(suffix.value)
-              ? getFulltext(suffix.text, suffix.value[0]).replace('CURRENT', suffix.value[1].toString()) 
+              ? getFulltext(suffix.text, suffix.value[0], suffix.value[1])
               : getFulltext(suffix.text, suffix.value)
             }
           </div>
