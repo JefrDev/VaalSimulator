@@ -4,17 +4,25 @@ export interface Item {
     itemLevel: number;
     quality?: number;
     rarity: 'Normal' | 'Magic' | 'Rare' | 'Unique';
-    attributes: (RegularAffix | HybridAffix)[];
+    attributes: (VariableAffix | FixedAffix | HybridAffix)[];
 }
 
-interface RegularAffix {
+interface BaseAffix {
     type: 'prefix' | 'suffix';
-    min: number;
-    max: number;
-    value: number;
     text: string;
     tier: number;
 }
+
+interface VariableAffix extends BaseAffix {
+    min: number;
+    max: number; 
+    value: number;
+}
+
+interface FixedAffix extends BaseAffix {
+    value: number;
+}
+
 
 interface HybridAffix {
     type: 'prefix hybrid' | 'suffix hybrid';
@@ -43,8 +51,6 @@ export const createDefaultItem = (name: string): Item => ({
         },
         {
             type: 'prefix',
-            min: 25,
-            max: 30,
             value: 30,
             text: '+CURRENT% increased movement speed',
             tier: 5
