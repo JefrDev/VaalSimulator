@@ -43,23 +43,29 @@ export const ItemDisplay = () => {
       <h1>Item Display</h1>
       <h2>{item?.itemName}</h2>
       <div>
-        <div className="p-0.5">
-          {item?.prefixes.map((prefix, index) => (
-            <div key={`prefix-${index}`}>
-              {isHybridAffix(prefix)
-                ? getFullTextHybrid(prefix.text, prefix.value)
-                : getFulltext(prefix.text, prefix.value)}
-            </div>
-          ))}
+        <div className="flex">
+          <span className="text-sm text-gray-500 self-center mr-2">prefix</span>
+          <div className="p-0.5">
+            {item?.prefixes.map((prefix, index) => (
+              <div key={`prefix-${index}`}>
+                {isHybridAffix(prefix)
+                  ? getFullTextHybrid(prefix.text, prefix.value)
+                  : getFulltext(prefix.text, prefix.value)}
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
-          {item?.suffixes.map((suffix, index) => (
-            <div className="p-0.5" key={`suffix-${index}`}>
-              {isHybridAffix(suffix)
-                ? getFullTextHybrid(suffix.text, suffix.value)
-                : getFulltext(suffix.text, suffix.value)}
-            </div>
-          ))}
+        <div className="flex">
+          <span className="text-sm text-gray-500 self-center mr-2">suffix</span>
+          <div className="p-0.5">
+            {item?.suffixes.map((suffix, index) => (
+              <div key={`suffix-${index}`}>
+                {isHybridAffix(suffix)
+                  ? getFullTextHybrid(suffix.text, suffix.value)
+                  : getFulltext(suffix.text, suffix.value)}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
