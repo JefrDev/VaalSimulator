@@ -42,31 +42,27 @@ export const ItemDisplay = () => {
     <div className="flex flex-col items-center bg-gray-100">
       <h1>Item Display</h1>
       <h2>{item?.itemName}</h2>
-      <div>
-        <div className="flex">
-          <span className="text-sm text-gray-500 self-center mr-2">prefix</span>
-          <div className="p-0.5">
-            {item?.prefixes.map((prefix, index) => (
-              <div key={`prefix-${index}`}>
-                {isHybridAffix(prefix)
-                  ? getFullTextHybrid(prefix.text, prefix.value)
-                  : getFulltext(prefix.text, prefix.value)}
+      <div className="p-2">
+        {item &&
+          [
+            ...item.prefixes.map((p) => ({ ...p, type: "prefix" })),
+            ...item.suffixes.map((s) => ({ ...s, type: "suffix" })),
+          ].map((affix, index) => (
+            <div
+              key={`affix-${index}`}
+              className="flex justify-between w-full items-center mb-1"
+            >
+              <span className="text-sm text-gray-500 w-20">{affix.type}</span>
+              <div className="flex-1">
+                {isHybridAffix(affix)
+                  ? getFullTextHybrid(affix.text, affix.value)
+                  : getFulltext(affix.text, affix.value)}
               </div>
-            ))}
-          </div>
-        </div>
-        <div className="flex">
-          <span className="text-sm text-gray-500 self-center mr-2">suffix</span>
-          <div className="p-0.5">
-            {item?.suffixes.map((suffix, index) => (
-              <div key={`suffix-${index}`}>
-                {isHybridAffix(suffix)
-                  ? getFullTextHybrid(suffix.text, suffix.value)
-                  : getFulltext(suffix.text, suffix.value)}
-              </div>
-            ))}
-          </div>
-        </div>
+              <span className="text-sm text-gray-500 w-12 text-right">
+                T{affix.tier}
+              </span>
+            </div>
+          ))}
       </div>
     </div>
   );
